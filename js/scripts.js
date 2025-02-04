@@ -54,4 +54,55 @@ document.addEventListener('DOMContentLoaded', function() {
     sections.forEach(section => {
         observer.observe(section);
     });
+
+    // Interactive console
+    const consoleOutput = document.getElementById('console-output');
+    const consoleInput = document.getElementById('console-input');
+
+    consoleInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            const command = consoleInput.value.trim();
+            consoleInput.value = '';
+            handleCommand(command);
+        }
+    });
+
+    function handleCommand(command) {
+        const output = document.createElement('div');
+        output.textContent = `> ${command}`;
+        consoleOutput.appendChild(output);
+
+        switch (command.toLowerCase()) {
+            case 'about':
+                scrollToSection('about');
+                break;
+            case 'skills':
+                scrollToSection('skills');
+                break;
+            case 'projects':
+                scrollToSection('projects');
+                break;
+            case 'experience':
+                scrollToSection('experience');
+                break;
+            case 'contact':
+                scrollToSection('contact');
+                break;
+            default:
+                const error = document.createElement('div');
+                error.textContent = 'Comando no reconocido.';
+                error.style.color = 'red';
+                consoleOutput.appendChild(error);
+        }
+
+        consoleOutput.scrollTop = consoleOutput.scrollHeight;
+    }
+
+    function scrollToSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        window.scrollTo({
+            top: section.offsetTop,
+            behavior: 'smooth'
+        });
+    }
 });
