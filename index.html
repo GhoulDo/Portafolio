@@ -3,130 +3,318 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portafolio personal de desarrollo de software">
+    <meta name="keywords" content="desarrollo de software, programación, Java, C++, bases de datos">
+    <meta name="author" content="Tu Nombre">
     <title>Mi Portafolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
     <header>
         <h1>Mi Portafolio</h1>
         <nav>
             <ul>
-                <li><a href="#about"><i class="fas fa-user"></i> Sobre Mí</a></li>
-                <li><a href="#skills"><i class="fas fa-code"></i> Habilidades</a></li>
-                <li><a href="#projects"><i class="fas fa-project-diagram"></i> Proyectos</a></li>
-                <li><a href="#experience"><i class="fas fa-briefcase"></i> Experiencia</a></li>
-                <li><a href="#contact"><i class="fas fa-envelope"></i> Contacto</a></li>
-                <li><a href="#console"><i class="fas fa-terminal"></i> Consola</a></li>
-                <li><a href="https://github.com/GhoulDo" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
-                <li><button id="language-toggle"><i class="fas fa-language"></i> English</button></li>
+                <li><a href="#about" aria-label="Ir a Sobre Mí"><i class="fas fa-user"></i> Sobre Mí</a></li>
+                <li><a href="#skills" aria-label="Ir a Habilidades"><i class="fas fa-code"></i> Habilidades</a></li>
+                <li><a href="#projects" aria-label="Ir a Proyectos"><i class="fas fa-project-diagram"></i> Proyectos</a></li>
+                <li><a href="#experience" aria-label="Ir a Experiencia"><i class="fas fa-briefcase"></i> Experiencia</a></li>
+                <li><a href="#contact" aria-label="Ir a Contacto"><i class="fas fa-envelope"></i> Contacto</a></li>
+                <li><button id="language-toggle" aria-label="Cambiar idioma"><i class="fas fa-language"></i> English</button></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section id="about">
-            <h2>Sobre Mí</h2>
+        <section id="about" aria-labelledby="about-title">
+            <h2 id="about-title" data-translate="about">Sobre Mí</h2>
             <div class="about-content">
-                <img src="img/youcam-makeup-try-on.jpg" alt="Foto de perfil" class="profile-photo">
+                <div class="profile-container">
+                    <img src="img/youcam-makeup-try-on.jpg" alt="Foto de perfil" class="profile-photo" loading="lazy">
+                </div>
                 <div class="about-text">
                     <p>👨‍💻 Estudiante de Desarrollo de Software | Apasionado por la Optimización de Procesos</p>
                     <p>Soy un estudiante de desarrollo de software con una sólida base en metodologías de desarrollo, bases de datos y optimización de procesos. Busco crear soluciones eficientes y escalables para las organizaciones.</p>
-                    <div class="social-links">
-                        <a href="https://github.com/GhoulDo" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" aria-labelledby="skills-title">
+            <h2 id="skills-title" data-translate="skills">Habilidades</h2>
+            <div class="skills-container">
+                <div class="skills-category">
+                    <h3>Frontend</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <i class="fab fa-html5"></i>
+                            <span>HTML5</span>
+                            <div class="skill-progress">
+                                <div class="progress" data-progress="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-css3-alt"></i>
+                            <span>CSS3</span>
+                            <div class="skill-progress">
+                                <div class="progress" data-progress="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-js"></i>
+                            <span>JavaScript</span>
+                            <div class="skill-progress">
+                                <div class="progress" data-progress="80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skills-category">
+                    <h3>Backend</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <i class="fab fa-java"></i>
+                            <span>Java</span>
+                            <div class="skill-progress">
+                                <div class="progress" data-progress="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-database"></i>
+                            <span>SQL</span>
+                            <div class="skill-progress">
+                                <div class="progress" data-progress="80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-node-js"></i>
+                            <span>Node.js</span>
+                            <div class="skill-progress">
+                                <div class="progress" data-progress="75%"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="skills">
-            <h2>Habilidades Clave</h2>
-            <ul class="skills-list">
-                <li>💻 Programación en Java y C++</li>
-                <li>🗄️ Administración de bases de datos (SQL, NoSQL)</li>
-                <li>🔍 Algoritmos y estructuras de datos</li>
-                <li>🛠️ Desarrollo de APIs RESTful</li>
-                <li>🚀 Implementación de microservicios</li>
-                <li>📊 Análisis y procesamiento de grandes volúmenes de datos</li>
-            </ul>
+        <section id="projects" aria-labelledby="projects-title">
+            <h2 id="projects-title" data-translate="projects">Proyectos</h2>
+            <div class="projects-grid">
+                <article class="project">
+                    <div class="project-image">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png" alt="Proyecto Pokémon" class="project-logo" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://ghouldo.github.io/pokemon-api-project/" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fas fa-external-link-alt"></i> Ver Demo</a>
+                                <a href="https://github.com/GhoulDo/pokemon-api-project" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fab fa-github"></i> Código</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Búsqueda de Pokémon</h3>
+                        <p>Un sitio web para buscar características de Pokémon utilizando la PokeAPI.</p>
+                        <div class="project-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                            <span>PokeAPI</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project">
+                    <div class="project-image">
+                        <img src="img/Captura de pantalla 2025-02-04 163653.png" alt="Proyecto Peluquería Canina" class="project-logo" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/GhoulDo/Peluqueria-canina" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fas fa-external-link-alt"></i> Ver Demo</a>
+                                <a href="https://github.com/GhoulDo/Peluqueria-canina" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fab fa-github"></i> Código</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Peluquería Canina</h3>
+                        <p>Un sitio web para una peluquería canina, con información sobre servicios y contacto. Backend desarrollado con TypeScript y MySQL, frontend con CSS y JavaScript.</p>
+                        <div class="project-tech">
+                            <span>TypeScript</span>
+                            <span>MySQL</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project">
+                    <div class="project-image">
+                        <img src="img/Captura de pantalla 2025-02-04 172050.png" alt="Proyecto Sistema de Turnos" class="project-logo" loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/GhoulDo/Banco-Villavo.git" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fas fa-external-link-alt"></i> Ver Demo</a>
+                                <a href="https://github.com/GhoulDo/Banco-Villavo.git" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fab fa-github"></i> Código</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Sistema de Turnos en un Banco</h3>
+                        <p>Un sistema para gestionar turnos en un banco, desarrollado en Java utilizando colas enlazadas para el backend.</p>
+                        <div class="project-tech">
+                            <span>Java</span>
+                            <span>Estructuras de Datos</span>
+                            <span>POO</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
         </section>
 
-        <section id="projects">
-            <h2>Proyectos</h2>
-            <div class="projects-grid">
-                <div class="project">
-                    <h3>Proyecto 1: Búsqueda de Pokémon</h3>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png" alt="PokeAPI Logo" class="project-logo">
-                    <p>Un sitio web para buscar características de Pokémon utilizando la PokeAPI.</p>
-                    <a href="https://ghouldo.github.io/pokemon-api-project/" target="_blank" class="project-link">Ver Proyecto</a>
+        <section id="experience" aria-labelledby="experience-title">
+            <h2 id="experience-title" data-translate="experience">Experiencia</h2>
+            <div class="experience-timeline">
+                <div class="experience-item">
+                    <div class="experience-date">
+                        <span class="year">2023</span>
+                        <span class="duration">Presente</span>
+                    </div>
+                    <div class="experience-content">
+                        <div class="experience-header">
+                            <h3>Desarrollador Full Stack</h3>
+                            <span class="company">Empresa Actual</span>
+                        </div>
+                        <div class="experience-details">
+                            <p class="description">Desarrollo de aplicaciones web utilizando tecnologías modernas como React, Node.js y MongoDB.</p>
+                            <ul class="responsibilities">
+                                <li><i class="fas fa-check"></i> Implementación de nuevas características y funcionalidades</li>
+                                <li><i class="fas fa-check"></i> Optimización de rendimiento y escalabilidad</li>
+                                <li><i class="fas fa-check"></i> Colaboración en equipo usando metodologías ágiles</li>
+                            </ul>
+                            <div class="tech-stack">
+                                <span>React</span>
+                                <span>Node.js</span>
+                                <span>MongoDB</span>
+                                <span>Git</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="project">
-                    <h3>Proyecto 2: Peluquería Canina</h3>
-                    <img src="img/Captura de pantalla 2025-02-04 163653.png" alt="Peluquería Canina Logo" class="project-logo">
-                    <p>Un sitio web para una peluquería canina, con información sobre servicios y contacto. Backend desarrollado con TypeScript y MySQL, frontend con CSS y JavaScript.</p>
-                    <a href="https://github.com/GhoulDo/Peluqueria-canina" target="_blank" class="project-link">Ver Proyecto</a>
+
+                <div class="experience-item">
+                    <div class="experience-date">
+                        <span class="year">2022</span>
+                        <span class="duration">2023</span>
+                    </div>
+                    <div class="experience-content">
+                        <div class="experience-header">
+                            <h3>Desarrollador Backend</h3>
+                            <span class="company">Empresa Anterior</span>
+                        </div>
+                        <div class="experience-details">
+                            <p class="description">Desarrollo de APIs RESTful y microservicios utilizando Java y Spring Boot.</p>
+                            <ul class="responsibilities">
+                                <li><i class="fas fa-check"></i> Diseño e implementación de arquitecturas de microservicios</li>
+                                <li><i class="fas fa-check"></i> Integración con bases de datos SQL y NoSQL</li>
+                                <li><i class="fas fa-check"></i> Implementación de seguridad y autenticación</li>
+                            </ul>
+                            <div class="tech-stack">
+                                <span>Java</span>
+                                <span>Spring Boot</span>
+                                <span>PostgreSQL</span>
+                                <span>Docker</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="project">
-                    <h3>Proyecto 3: Sistema de Turnos en un Banco</h3>
-                    <img src="img/Captura de pantalla 2025-02-04 172050.png" alt="Sistema de Turnos Logo" class="project-logo">
-                    <p>Un sistema para gestionar turnos en un banco, desarrollado en Java utilizando colas enlazadas para el backend.</p>
-                    <a href="https://github.com/GhoulDo/Banco-Villavo.git" target="_blank" class="project-link">Ver Proyecto</a>
+
+                <div class="experience-item">
+                    <div class="experience-date">
+                        <span class="year">2021</span>
+                        <span class="duration">2022</span>
+                    </div>
+                    <div class="experience-content">
+                        <div class="experience-header">
+                            <h3>Desarrollador Frontend</h3>
+                            <span class="company">Primera Empresa</span>
+                        </div>
+                        <div class="experience-details">
+                            <p class="description">Desarrollo de interfaces de usuario utilizando HTML, CSS y JavaScript.</p>
+                            <ul class="responsibilities">
+                                <li><i class="fas fa-check"></i> Creación de diseños responsivos y accesibles</li>
+                                <li><i class="fas fa-check"></i> Implementación de animaciones y efectos visuales</li>
+                                <li><i class="fas fa-check"></i> Optimización de rendimiento y SEO</li>
+                            </ul>
+                            <div class="tech-stack">
+                                <span>HTML5</span>
+                                <span>CSS3</span>
+                                <span>JavaScript</span>
+                                <span>jQuery</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="experience">
-            <h2>Experiencia</h2>
-            <p>He trabajado en varios proyectos universitarios e independientes que me han permitido desarrollar mis habilidades en desarrollo de software. Algunos de estos proyectos incluyen:</p>
-            <ul>
-                <li>Desarrollo de una aplicación de gestión de tareas utilizando Java y Spring Boot.</li>
-                <li>Implementación de un sistema de reservas para una biblioteca universitaria con Node.js y MongoDB.</li>
-                <li>Creación de un sitio web de comercio electrónico utilizando HTML, CSS y JavaScript.</li>
-                <li>Desarrollo de un sitio web para buscar características de Pokémon utilizando la PokeAPI.</li>
-                <li>Creación de un sitio web para una peluquería canina, con backend en TypeScript y MySQL, y frontend en CSS y JavaScript.</li>
-                <li>Desarrollo de un sistema para gestionar turnos en un banco utilizando Java y colas enlazadas.</li>
-            </ul>
-            <p>En estos proyectos, he aprendido y aplicado habilidades como:</p>
-            <ul>
-                <li>Manejo de APIs y creación de endpoints.</li>
-                <li>Creación y manejo de tokens para autenticación y autorización.</li>
-                <li>Desarrollo de CRUDs (Create, Read, Update, Delete).</li>
-                <li>Administración y manejo de bases de datos SQL y NoSQL.</li>
-            </ul>
-        </section>
-
-        <section id="contact">
-            <h2>Contacto</h2>
-            <form action="https://formspree.io/f/mwpegbnr" method="POST">
-                <label for="name">Nombre:</label>
-                <input type="text" id="name" name="name" required>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-                <label for="message">Mensaje:</label>
-                <textarea id="message" name="message" required></textarea>
-                <button type="submit">Enviar</button>
-            </form>
-        </section>
-
-        <section id="console">
-            <h2>Consola Interactiva</h2>
-            <p>Usa los siguientes comandos para navegar por la página:</p>
-            <ul>
-                <li><code>about</code>: Navega a la sección "Sobre Mí".</li>
-                <li><code>skills</code>: Navega a la sección "Habilidades".</li>
-                <li><code>projects</code>: Navega a la sección "Proyectos".</li>
-                <li><code>experience</code>: Navega a la sección "Experiencia".</li>
-                <li><code>contact</code>: Navega a la sección "Contacto".</li>
-            </ul>
-            <div id="console-output"></div>
-            <input type="text" id="console-input" placeholder="Escribe un comando...">
+        <section id="contact" aria-labelledby="contact-title">
+            <h2 id="contact-title" data-translate="contact">Contacto</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p>joooohanenciso@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Teléfono</h3>
+                            <p>3118541144</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Ubicación</h3>
+                            <p>Villavicencio, Meta, Colombia</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" action="https://formspree.io/f/mwpegbnr" method="POST" novalidate>
+                    <div class="form-group">
+                        <label for="name">Nombre:</label>
+                        <input type="text" id="name" name="name" required minlength="2" maxlength="50">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Asunto:</label>
+                        <input type="text" id="subject" name="subject" required minlength="5" maxlength="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje:</label>
+                        <textarea id="message" name="message" required minlength="10" maxlength="500"></textarea>
+                    </div>
+                    <button type="submit">Enviar Mensaje</button>
+                </form>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Mi Portafolio</p>
+        <div class="footer-content">
+            <p>&copy; 2024 Mi Portafolio. Todos los derechos reservados.</p>
+            <div class="footer-links">
+                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
     </footer>
+
     <script src="js/scripts.js"></script>
 </body>
 </html>
