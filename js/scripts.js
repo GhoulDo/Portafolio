@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // Selección de elementos
+    const nav = document.querySelector('nav');
     const navLinks = document.querySelectorAll('nav a');
     const sections = document.querySelectorAll('section');
     const projects = document.querySelectorAll('.project');
@@ -18,20 +19,54 @@ document.addEventListener('DOMContentLoaded', function() {
     const profilePhoto = document.querySelector('.profile-photo');
     const contactItems = document.querySelectorAll('.contact-item');
 
+    // Manejo de la navegación
+    let lastScroll = 0;
+    let isScrolling = false;
+    let scrollTimeout;
+
+    window.addEventListener('scroll', () => {
+        if (!isScrolling) {
+            isScrolling = true;
+            clearTimeout(scrollTimeout);
+            
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                nav.classList.add('hidden');
+            } else {
+                nav.classList.remove('hidden');
+            }
+            
+            lastScroll = currentScroll;
+            
+            scrollTimeout = setTimeout(() => {
+                isScrolling = false;
+            }, 150);
+        }
+    });
+
     // Navegación suave mejorada
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = link.getAttribute('href');
             const targetSection = document.querySelector(targetId);
-            const headerOffset = 80;
-            const elementPosition = targetSection.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            if (targetSection) {
+                const headerOffset = 80;
+                const elementPosition = targetSection.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+
+                // Cerrar el menú en móviles si está abierto
+                if (window.innerWidth <= 768) {
+                    nav.classList.add('hidden');
+                }
+            }
         });
     });
 
@@ -67,6 +102,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Efectos hover en proyectos mejorados
     projects.forEach(project => {
+        const links = project.querySelectorAll('.project-link');
+        
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        });
+
         project.addEventListener('mousemove', (e) => {
             const rect = project.getBoundingClientRect();
             const x = e.clientX - rect.left;
