@@ -1,21 +1,23 @@
 /* Variables globales */
 :root {
-    --primary-color: #0A192F;
-    --secondary-color: #64FFDA;
-    --accent-color: #FF6B6B;
-    --background-dark: #0A192F;
-    --background-light: #112240;
-    --text-color: #CCD6F6;
-    --text-muted: #8892B0;
-    --card-bg: #112240;
-    --border-color: #233554;
+    --primary-color: #2D3436;
+    --secondary-color: #00B894;
+    --accent-color: #0984E3;
+    --background-dark: #1E272E;
+    --background-light: #2D3436;
+    --text-color: #DFE6E9;
+    --text-muted: #B2BEC3;
+    --card-bg: #2D3436;
+    --border-color: rgba(0, 184, 148, 0.2);
     --transition-speed: 0.3s;
-    --gradient-1: linear-gradient(45deg, #64FFDA, #0A192F);
-    --gradient-2: linear-gradient(45deg, #0A192F, #64FFDA);
-    --gradient-3: linear-gradient(45deg, #112240, #64FFDA);
-    --shadow-color: rgba(100, 255, 218, 0.1);
-    --success-color: #64FFDA;
-    --error-color: #FF6B6B;
+    --gradient-1: linear-gradient(135deg, #00B894, #0984E3);
+    --gradient-2: linear-gradient(135deg, #6C5CE7, #A8E6CF);
+    --gradient-3: linear-gradient(135deg, #FF7675, #FDCB6E);
+    --shadow-color: rgba(0, 184, 148, 0.2);
+    --success-color: #00B894;
+    --error-color: #FF7675;
+    --glass-bg: rgba(30, 39, 46, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.1);
 }
 
 /* Estilos base mejorados */
@@ -23,22 +25,23 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--background-dark);
-    color: var(--text-color);
     background: linear-gradient(135deg, var(--background-dark) 0%, var(--background-light) 100%);
+    color: var(--text-color);
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
-/* Header mejorado */
+/* Header mejorado con efecto glassmorphism */
 header {
-    background-color: rgba(10, 25, 47, 0.95);
+    background: var(--glass-bg);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
     z-index: 1000;
     padding: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid var(--glass-border);
 }
 
 header h1 {
@@ -48,12 +51,33 @@ header h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-align: center;
+    text-shadow: 0 2px 10px rgba(0, 184, 148, 0.3);
+    position: relative;
+    display: inline-block;
 }
 
-/* Navegación mejorada */
+header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: var(--gradient-1);
+    border-radius: 3px;
+}
+
+/* Navegación mejorada con efecto glassmorphism */
 nav {
     position: relative;
     padding: 1rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    margin: 1rem auto;
+    max-width: 800px;
 }
 
 nav ul {
@@ -69,14 +93,16 @@ nav ul li a, nav ul li button {
     color: var(--text-color);
     text-decoration: none;
     font-weight: 500;
-    padding: 0.5rem 1rem;
+    padding: 0.8rem 1.5rem;
     border-radius: 25px;
-    transition: all var(--transition-speed);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     background: transparent;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--glass-border);
     position: relative;
     overflow: hidden;
     white-space: nowrap;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 nav ul li a::before, nav ul li button::before {
@@ -94,32 +120,25 @@ nav ul li a::before, nav ul li button::before {
 
 nav ul li a:hover, nav ul li button:hover {
     background: var(--gradient-1);
-    color: var(--primary-color);
+    color: white;
     border-color: transparent;
     box-shadow: 0 4px 15px var(--shadow-color);
+    transform: translateY(-2px);
 }
 
-nav ul li a:hover::before, nav ul li button:hover::before {
-    opacity: 0.1;
-}
-
-/* Secciones principales */
-main {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-}
-
+/* Secciones principales con efecto glassmorphism */
 section {
-    background: var(--card-bg);
-    border-radius: 15px;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all var(--transition-speed);
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--glass-border);
 }
 
 section::before {
@@ -137,19 +156,20 @@ section::before {
 
 section:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px var(--shadow-color);
+    box-shadow: 0 8px 40px rgba(0, 184, 148, 0.2);
 }
 
 section:hover::before {
     opacity: 0.05;
 }
 
-/* Sobre Mí mejorado */
+/* Sobre Mí mejorado con efectos 3D */
 .about-content {
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 2rem;
     align-items: center;
+    position: relative;
 }
 
 .profile-container {
@@ -318,7 +338,7 @@ section:hover::before {
     font-size: 0.9rem;
 }
 
-/* Habilidades mejoradas */
+/* Habilidades mejoradas con efectos 3D */
 .skills-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -326,17 +346,20 @@ section:hover::before {
 }
 
 .skills-category {
-    background: var(--background-dark);
-    padding: 1.5rem;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all var(--transition-speed);
-    border: 1px solid var(--border-color);
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--glass-border);
+    transform-style: preserve-3d;
 }
 
 .skills-category:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 188, 212, 0.2);
+    transform: translateY(-5px) rotateX(5deg);
+    box-shadow: 0 8px 40px rgba(0, 184, 148, 0.2);
 }
 
 .skills-category h3 {
@@ -366,30 +389,34 @@ section:hover::before {
 }
 
 .skill-item {
+    background: var(--glass-bg);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid var(--glass-border);
+    transform: translateZ(10px);
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    padding: 1rem;
-    background: var(--card-bg);
-    border-radius: 10px;
-    transition: all var(--transition-speed);
-    border: 1px solid var(--border-color);
+    gap: 0.8rem;
+    padding: 1.5rem;
+    border-radius: 15px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .skill-item:hover {
     background: var(--background-light);
     border-color: var(--secondary-color);
-    transform: translateX(5px);
+    transform: translateX(10px);
+    box-shadow: 0 4px 20px rgba(0, 184, 148, 0.2);
 }
 
 .skill-item i {
-    font-size: 2rem;
-    color: var(--primary-color);
-    transition: all var(--transition-speed);
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .skill-item:hover i {
-    transform: scale(1.2);
+    transform: scale(1.2) rotate(5deg);
     color: var(--accent-color);
 }
 
@@ -492,11 +519,11 @@ section:hover::before {
     }
 
     .skill-item {
-        padding: 0.8rem;
+        padding: 1.2rem;
     }
 
     .skill-item i {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
 }
 
@@ -506,7 +533,7 @@ section:hover::before {
     }
 
     .skill-item i {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
     }
 
     .skill-item span {
@@ -514,62 +541,51 @@ section:hover::before {
     }
 }
 
-/* Proyectos mejorados */
+/* Proyectos mejorados con efectos 3D y glassmorphism */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+    padding: 1rem;
 }
 
 .project {
-    background: var(--background-dark);
-    border-radius: 15px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 25px;
     overflow: hidden;
-    transition: all var(--transition-speed);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
-    border: 1px solid var(--border-color);
-}
-
-.project::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--gradient-1);
-    opacity: 0;
-    transition: opacity var(--transition-speed);
-    z-index: 1;
+    border: 1px solid var(--glass-border);
+    transform-style: preserve-3d;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .project:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 10px 30px rgba(0, 188, 212, 0.2);
-}
-
-.project:hover::before {
-    opacity: 0.1;
+    transform: translateY(-15px) scale(1.02) rotateX(5deg);
+    box-shadow: 0 20px 50px rgba(0, 184, 148, 0.3);
 }
 
 .project-image {
     position: relative;
-    height: 250px;
+    height: 280px;
     overflow: hidden;
-    border-radius: 15px 15px 0 0;
+    border-radius: 25px 25px 0 0;
+    transform: translateZ(20px);
 }
 
 .project-logo {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: all var(--transition-speed);
-    filter: brightness(0.9);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: brightness(0.9) contrast(1.1);
 }
 
 .project:hover .project-logo {
     transform: scale(1.1);
-    filter: brightness(1);
+    filter: brightness(1) contrast(1.2);
 }
 
 .project-overlay {
@@ -578,13 +594,18 @@ section:hover::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.85);
+    background: linear-gradient(
+        to bottom,
+        rgba(30, 39, 46, 0.8),
+        rgba(30, 39, 46, 0.95)
+    );
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: all var(--transition-speed);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     z-index: 2;
 }
 
@@ -594,9 +615,9 @@ section:hover::before {
 
 .project-links {
     display: flex;
-    gap: 1rem;
-    transform: translateY(20px);
-    transition: all var(--transition-speed);
+    gap: 1.5rem;
+    transform: translateY(30px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project:hover .project-links {
@@ -604,17 +625,20 @@ section:hover::before {
 }
 
 .project-link {
-    padding: 0.8rem 1.5rem;
+    padding: 1rem 2.5rem;
     background: var(--gradient-1);
     color: white;
     text-decoration: none;
-    border-radius: 25px;
-    transition: all var(--transition-speed);
+    border-radius: 30px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.8rem;
     position: relative;
     overflow: hidden;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 184, 148, 0.2);
 }
 
 .project-link::before {
@@ -626,12 +650,12 @@ section:hover::before {
     height: 100%;
     background: var(--gradient-2);
     opacity: 0;
-    transition: opacity var(--transition-speed);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 184, 148, 0.4);
 }
 
 .project-link:hover::before {
@@ -639,49 +663,67 @@ section:hover::before {
 }
 
 .project-content {
-    padding: 1.5rem;
-    background: var(--card-bg);
+    padding: 2.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     position: relative;
     z-index: 1;
-    border: 1px solid var(--border-color);
+    border-top: 1px solid var(--glass-border);
 }
 
 .project-content h3 {
     color: var(--secondary-color);
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-    transition: color var(--transition-speed);
+    margin-bottom: 1.2rem;
+    font-size: 2rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    display: inline-block;
 }
 
-.project:hover .project-content h3 {
+.project-content h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 3px;
     background: var(--gradient-1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    border-radius: 3px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project:hover .project-content h3::after {
+    width: 100%;
 }
 
 .project-content p {
     color: var(--text-color);
-    margin-bottom: 1rem;
-    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    font-size: 1.1rem;
 }
 
 .project-tech {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1rem;
+    gap: 1rem;
+    margin-top: 2rem;
 }
 
 .project-tech span {
-    padding: 0.3rem 0.8rem;
-    background: var(--background-dark);
-    border-radius: 15px;
-    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 25px;
+    font-size: 0.95rem;
     color: var(--secondary-color);
-    transition: all var(--transition-speed);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--glass-border);
+    font-weight: 500;
 }
 
 .project-tech span::before {
@@ -693,25 +735,149 @@ section:hover::before {
     height: 100%;
     background: var(--gradient-1);
     opacity: 0;
-    transition: opacity var(--transition-speed);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project-tech span:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     background: var(--gradient-1);
-    color: var(--primary-color);
+    color: white;
     border-color: transparent;
+    box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3);
 }
 
 .project-tech span:hover::before {
     opacity: 1;
 }
 
-.project-tech span:hover {
-    color: white;
+/* Media queries para proyectos */
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0.5rem;
+    }
+
+    .project-image {
+        height: 250px;
+    }
+
+    .project-content {
+        padding: 2rem;
+    }
+
+    .project-content h3 {
+        font-size: 1.8rem;
+    }
+
+    .project-content p {
+        font-size: 1rem;
+    }
+
+    .project-tech {
+        gap: 0.8rem;
+    }
+
+    .project-tech span {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
 }
 
-/* Experiencia mejorada */
+@media (max-width: 480px) {
+    .project-image {
+        height: 220px;
+    }
+
+    .project-content {
+        padding: 1.5rem;
+    }
+
+    .project-content h3 {
+        font-size: 1.5rem;
+    }
+
+    .project-content p {
+        font-size: 0.95rem;
+    }
+
+    .project-tech {
+        gap: 0.6rem;
+    }
+
+    .project-tech span {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    .project-link {
+        padding: 0.8rem 2rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Efectos de hover mejorados para proyectos */
+.project::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-1);
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+
+.project:hover::before {
+    opacity: 0.05;
+}
+
+/* Animación de entrada para proyectos */
+.project {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: projectFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes projectFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Efecto de brillo en los bordes */
+.project::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--gradient-1);
+    border-radius: 27px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project:hover::after {
+    opacity: 0.3;
+    animation: borderGlow 2s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Experiencia mejorada con timeline */
 .experience-timeline {
     position: relative;
     max-width: 1000px;
@@ -728,6 +894,7 @@ section:hover::before {
     width: 2px;
     height: 100%;
     background: var(--gradient-1);
+    box-shadow: 0 0 10px var(--shadow-color);
 }
 
 .experience-item {
@@ -761,8 +928,10 @@ section:hover::before {
     align-items: center;
     gap: 0.2rem;
     z-index: 2;
-    box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
+    box-shadow: 0 4px 15px var(--shadow-color);
     min-width: 120px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .experience-date .year {
@@ -803,7 +972,7 @@ section:hover::before {
 
 .experience-item:hover .experience-content {
     transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 188, 212, 0.2);
+    box-shadow: 0 8px 30px rgba(0, 184, 148, 0.2);
 }
 
 .experience-item:hover .experience-content::before {
@@ -813,7 +982,7 @@ section:hover::before {
 .experience-header {
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
-    border-bottom: 2px solid rgba(0, 188, 212, 0.1);
+    border-bottom: 2px solid rgba(0, 184, 148, 0.1);
 }
 
 .experience-header h3 {
@@ -901,7 +1070,6 @@ section:hover::before {
     .experience-date {
         left: 30px;
         transform: translateX(-50%);
-        min-width: 100px;
     }
 
     .experience-content {
@@ -935,7 +1103,7 @@ section:hover::before {
     }
 }
 
-/* Contacto mejorado */
+/* Contacto mejorado con efectos glassmorphism */
 .contact-container {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -948,16 +1116,18 @@ section:hover::before {
 }
 
 .contact-item {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    transform: translateZ(10px);
     display: flex;
     align-items: center;
     gap: 1rem;
     padding: 1.5rem;
-    background: var(--background-dark);
-    border-radius: 15px;
     transition: all var(--transition-speed);
     position: relative;
     overflow: hidden;
-    border: 1px solid var(--border-color);
 }
 
 .contact-item::before {
@@ -975,7 +1145,7 @@ section:hover::before {
 
 .contact-item:hover {
     transform: translateX(10px);
-    box-shadow: 0 5px 15px rgba(0, 188, 212, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 184, 148, 0.2);
 }
 
 .contact-item:hover::before {
@@ -1031,9 +1201,11 @@ section:hover::before {
 .form-group textarea {
     width: 100%;
     padding: 1rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--glass-border);
     border-radius: 8px;
-    background: var(--background-dark);
+    background: var(--glass-bg);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     color: var(--text-color);
     transition: all var(--transition-speed);
     font-size: 1rem;
@@ -1216,11 +1388,13 @@ form button.loading::after {
 
 /* Footer mejorado */
 footer {
-    background: var(--background-dark);
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 2rem;
     text-align: center;
     margin-top: 3rem;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--glass-border);
 }
 
 .footer-content {
@@ -1247,14 +1421,20 @@ footer {
     color: var(--secondary-color);
 }
 
-/* Animaciones */
+/* Animaciones mejoradas */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { 
+        opacity: 0; 
+        transform: translateY(30px) scale(0.95); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
 }
 
 .visible {
-    animation: fadeIn 0.6s ease-out forwards;
+    animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* Media queries mejoradas */
@@ -1308,8 +1488,8 @@ footer {
     }
 
     section {
-        padding: 1rem;
-        margin-bottom: 1rem;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
     }
 
     .about-content {
@@ -1493,5 +1673,80 @@ footer {
         --background-dark: #000000;
         --background-light: #1a1a1a;
         --card-bg: #2d2d2d;
+        --glass-bg: rgba(0, 0, 0, 0.8);
+    }
+}
+
+/* Efectos de hover mejorados */
+.hover-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.hover-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-1);
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+
+.hover-effect:hover::after {
+    opacity: 0.1;
+}
+
+/* Media queries mejoradas */
+@media (max-width: 768px) {
+    section {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .project-content {
+        padding: 1.5rem;
+    }
+
+    .project-content h3 {
+        font-size: 1.5rem;
+    }
+
+    .skill-item {
+        padding: 1.2rem;
+    }
+
+    .skill-item i {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    section {
+        padding: 1rem;
+    }
+
+    .project-content {
+        padding: 1rem;
+    }
+
+    .project-content h3 {
+        font-size: 1.3rem;
+    }
+
+    .project-tech span {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    .skill-item {
+        padding: 1rem;
+    }
+
+    .skill-item i {
+        font-size: 1.8rem;
     }
 }

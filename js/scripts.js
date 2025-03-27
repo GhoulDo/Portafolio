@@ -1,19 +1,22 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Configuración
+    // Configuración de animaciones
     const config = {
-        animationDuration: 600,
+        animationDuration: 800,
         typingSpeed: 50,
-        consolePrefix: '> '
+        scrollThreshold: 0.2,
+        hoverDelay: 100,
+        parallaxIntensity: 0.1,
+        rotationIntensity: 0.02
     };
 
-    // Selección de elementos del DOM
+    // Selección de elementos
     const navLinks = document.querySelectorAll('nav a');
     const sections = document.querySelectorAll('section');
-    const form = document.querySelector('form');
-    const languageToggle = document.querySelector('#language-toggle');
-    const profilePhoto = document.querySelector('.profile-photo');
-    const skillsList = document.querySelector('.skills-list');
     const projects = document.querySelectorAll('.project');
+    const skillItems = document.querySelectorAll('.skill-item');
+    const experienceItems = document.querySelectorAll('.experience-item');
+    const profilePhoto = document.querySelector('.profile-photo');
+    const contactItems = document.querySelectorAll('.contact-item');
 
     // Navegación suave mejorada
     navLinks.forEach(link => {
@@ -32,233 +35,215 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Animaciones al hacer scroll
+    // Animaciones al hacer scroll mejoradas
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.2
+        threshold: config.scrollThreshold
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                if (entry.target.classList.contains('experience-item')) {
+                if (entry.target.classList.contains('project')) {
                     entry.target.style.transitionDelay = `${entry.target.dataset.delay || 0}s`;
                 }
             }
         });
     }, observerOptions);
 
-    sections.forEach(section => {
+    // Observar secciones con delay
+    sections.forEach((section, index) => {
+        section.dataset.delay = index * 0.2;
         observer.observe(section);
     });
 
-    projects.forEach(project => {
+    // Observar proyectos con delay
+    projects.forEach((project, index) => {
+        project.dataset.delay = index * 0.2;
         observer.observe(project);
     });
 
-    // Observar elementos de experiencia con delay
-    const experienceItems = document.querySelectorAll('.experience-item');
-    experienceItems.forEach((item, index) => {
-        item.dataset.delay = index * 0.2;
-        observer.observe(item);
-    });
-
-    // Efecto parallax en la foto de perfil
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        if (profilePhoto) {
-            profilePhoto.style.transform = `translateY(${scrolled * 0.1}px)`;
-        }
-    });
-
-    // Efectos hover en las habilidades
-    if (skillsList) {
-        skillsList.addEventListener('mouseenter', () => {
-            const items = skillsList.querySelectorAll('li');
-            items.forEach((item, index) => {
-                setTimeout(() => {
-                    item.style.transform = 'translateX(10px)';
-                    item.style.opacity = '1';
-                }, index * 100);
-            });
-        });
-
-        skillsList.addEventListener('mouseleave', () => {
-            const items = skillsList.querySelectorAll('li');
-            items.forEach(item => {
-                item.style.transform = 'translateX(0)';
-                item.style.opacity = '0.8';
-            });
-        });
-    }
-
-    // Manejo del formulario de contacto
-    const contactForm = document.querySelector('.contact-form');
-    const submitButton = contactForm.querySelector('button[type="submit"]');
-
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        // Validar el formulario
-        if (!contactForm.checkValidity()) {
-            contactForm.reportValidity();
-            return;
-        }
-
-        // Mostrar estado de carga
-        submitButton.classList.add('loading');
-        submitButton.disabled = true;
-
-        try {
-            const formData = new FormData(contactForm);
-            const response = await fetch(contactForm.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-
-            if (response.ok) {
-                showMessage('¡Mensaje enviado con éxito!', 'success');
-                contactForm.reset();
-            } else {
-                throw new Error('Error al enviar el mensaje');
-            }
-        } catch (error) {
-            showMessage('Error al enviar el mensaje. Por favor, intenta nuevamente.', 'error');
-            console.error('Error:', error);
-        } finally {
-            // Restaurar el botón
-            submitButton.classList.remove('loading');
-            submitButton.disabled = false;
-        }
-    });
-
-    function showMessage(message, type) {
-        // Crear o actualizar el mensaje
-        let messageElement = document.querySelector('.form-message');
-        if (!messageElement) {
-            messageElement = document.createElement('div');
-            messageElement.className = 'form-message';
-            contactForm.insertBefore(messageElement, contactForm.firstChild);
-        }
-
-        // Actualizar el mensaje
-        messageElement.textContent = message;
-        messageElement.className = `form-message ${type} show`;
-
-        // Ocultar el mensaje después de 5 segundos
-        setTimeout(() => {
-            messageElement.classList.remove('show');
-            setTimeout(() => {
-                messageElement.remove();
-            }, 300);
-        }, 5000);
-    }
-
-    // Validación en tiempo real
-    const formInputs = contactForm.querySelectorAll('input, textarea');
-    formInputs.forEach(input => {
-        input.addEventListener('input', () => {
-            if (input.validity.valid) {
-                input.classList.remove('invalid');
-            } else {
-                input.classList.add('invalid');
-            }
-        });
-    });
-
-    // Animación de progreso de habilidades
-    function animateSkills() {
-        const skillBars = document.querySelectorAll('.progress');
-        
-        skillBars.forEach(bar => {
-            const targetWidth = bar.getAttribute('data-progress');
-            bar.style.width = '0%';
-            
-            setTimeout(() => {
-                bar.style.width = targetWidth;
-            }, 100);
-        });
-    }
-
-    // Inicializar animaciones cuando las habilidades sean visibles
-    const skillsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateSkills();
-                skillsObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    const skillsSection = document.querySelector('.skills-section');
-    if (skillsSection) {
-        skillsObserver.observe(skillsSection);
-    }
-
-    // Cambio de idioma mejorado
-    if (languageToggle) {
-        const translations = {
-            es: {
-                about: 'Sobre Mí',
-                skills: 'Habilidades',
-                projects: 'Proyectos',
-                experience: 'Experiencia',
-                contact: 'Contacto'
-            },
-            en: {
-                about: 'About Me',
-                skills: 'Skills',
-                projects: 'Projects',
-                experience: 'Experience',
-                contact: 'Contact'
-            }
-        };
-
-        let currentLang = 'es';
-
-        languageToggle.addEventListener('click', () => {
-            currentLang = currentLang === 'es' ? 'en' : 'es';
-            updateLanguage(currentLang);
-        });
-
-        function updateLanguage(lang) {
-            const elements = document.querySelectorAll('[data-translate]');
-            elements.forEach(element => {
-                const key = element.getAttribute('data-translate');
-                if (translations[lang][key]) {
-                    element.textContent = translations[lang][key];
-                }
-            });
-        }
-    }
-
-    // Efectos de hover en proyectos
+    // Efectos hover en proyectos mejorados
     projects.forEach(project => {
-        project.addEventListener('mouseenter', () => {
-            const overlay = project.querySelector('.project-overlay');
-            if (overlay) {
-                overlay.style.opacity = '1';
-            }
+        project.addEventListener('mousemove', (e) => {
+            const rect = project.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / centerY * 10;
+            const rotateY = (centerX - x) / centerX * 10;
+            
+            project.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
         });
 
         project.addEventListener('mouseleave', () => {
-            const overlay = project.querySelector('.project-overlay');
-            if (overlay) {
-                overlay.style.opacity = '0';
-            }
+            project.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
         });
     });
+
+    // Efectos hover en habilidades mejorados
+    skillItems.forEach(item => {
+        item.addEventListener('mousemove', (e) => {
+            const rect = item.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / centerY * 5;
+            const rotateY = (centerX - x) / centerX * 5;
+            
+            item.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+        });
+
+        item.addEventListener('mouseleave', () => {
+            item.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+        });
+    });
+
+    // Efecto parallax mejorado en la foto de perfil
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        if (profilePhoto) {
+            profilePhoto.style.transform = `
+                translateY(${scrolled * config.parallaxIntensity}px)
+                rotate(${scrolled * config.rotationIntensity}deg)
+            `;
+        }
+    });
+
+    // Animación de elementos de experiencia
+    const experienceObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                entry.target.style.transitionDelay = `${entry.target.dataset.delay || 0}s`;
+            }
+        });
+    }, {
+        threshold: config.scrollThreshold
+    });
+
+    experienceItems.forEach((item, index) => {
+        item.dataset.delay = index * 0.3;
+        experienceObserver.observe(item);
+    });
+
+    // Efectos hover en elementos de contacto
+    contactItems.forEach(item => {
+        item.addEventListener('mousemove', (e) => {
+            const rect = item.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / centerY * 5;
+            const rotateY = (centerX - x) / centerX * 5;
+            
+            item.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+        });
+
+        item.addEventListener('mouseleave', () => {
+            item.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+        });
+    });
+
+    // Formulario de contacto mejorado
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        const formInputs = contactForm.querySelectorAll('input, textarea');
+        
+        formInputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('focused');
+                input.style.transform = 'translateY(-2px)';
+            });
+
+            input.addEventListener('blur', () => {
+                if (!input.value) {
+                    input.parentElement.classList.remove('focused');
+                    input.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            
+            try {
+                submitButton.textContent = 'Enviando...';
+                submitButton.disabled = true;
+                
+                const formData = new FormData(contactForm);
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    showMessage('¡Mensaje enviado con éxito!', 'success');
+                    contactForm.reset();
+                } else {
+                    throw new Error('Error al enviar el mensaje');
+                }
+            } catch (error) {
+                showMessage('Error al enviar el mensaje. Por favor, intenta nuevamente.', 'error');
+            } finally {
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            }
+        });
+    }
+
+    // Función mejorada para mostrar mensajes
+    function showMessage(message, type = 'success') {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${type} show`;
+        messageDiv.textContent = message;
+        
+        const container = document.querySelector('.contact-container');
+        container.insertBefore(messageDiv, container.firstChild);
+        
+        setTimeout(() => {
+            messageDiv.classList.remove('show');
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 300);
+        }, 5000);
+    }
 
     // Inicialización
     document.addEventListener('DOMContentLoaded', () => {
         // Añadir clase visible a la primera sección
         if (sections[0]) {
             sections[0].classList.add('visible');
+        }
+    });
+});
+
+// Navegación suave
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         }
     });
 });
