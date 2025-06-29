@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const sections = document.querySelectorAll('section');
     const projects = document.querySelectorAll('.project');
     const skillItems = document.querySelectorAll('.skill-item');
-    const experienceItems = document.querySelectorAll('.experience-item');
     const profilePhoto = document.querySelector('.profile-photo');
     const contactItems = document.querySelectorAll('.contact-item');
 
@@ -100,33 +99,44 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(project);
     });
 
-    // Efectos hover en proyectos mejorados
-    projects.forEach(project => {
+    // Efectos hover en proyectos mejorados - SIMPLIFICADO
+    projects.forEach((project, index) => {
         const links = project.querySelectorAll('.project-link');
         
+        // Manejar clicks en enlaces de proyectos
         links.forEach(link => {
-            link.addEventListener('click', (e) => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
                 e.stopPropagation();
+                
+                const url = this.getAttribute('href');
+                console.log('Abriendo URL:', url);
+                
+                if (url && url !== '#' && url !== '') {
+                    window.open(url, '_blank', 'noopener,noreferrer');
+                }
+            });
+
+            // Mejorar accesibilidad
+            link.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
             });
         });
 
-        project.addEventListener('mousemove', (e) => {
-            const rect = project.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / centerY * 10;
-            const rotateY = (centerX - x) / centerX * 10;
-            
-            project.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+        // Efectos de hover simplificados
+        project.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-15px) scale(1.02)';
         });
 
-        project.addEventListener('mouseleave', () => {
-            project.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+        project.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
         });
+
+        // Añadir delay para animaciones
+        project.style.animationDelay = `${index * 0.1}s`;
     });
 
     // Efectos hover en habilidades mejorados
@@ -159,23 +169,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 rotate(${scrolled * config.rotationIntensity}deg)
             `;
         }
-    });
-
-    // Animación de elementos de experiencia
-    const experienceObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                entry.target.style.transitionDelay = `${entry.target.dataset.delay || 0}s`;
-            }
-        });
-    }, {
-        threshold: config.scrollThreshold
-    });
-
-    experienceItems.forEach((item, index) => {
-        item.dataset.delay = index * 0.3;
-        experienceObserver.observe(item);
     });
 
     // Efectos hover en elementos de contacto
@@ -269,15 +262,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Inicialización
-    document.addEventListener('DOMContentLoaded', () => {
-        // Añadir clase visible a la primera sección
-        if (sections[0]) {
-            sections[0].classList.add('visible');
-        }
-    });
+    // Añadir clase visible a la primera sección
+    if (sections[0]) {
+        sections[0].classList.add('visible');
+    }
 });
 
-// Navegación suave
+// Navegación suave adicional (fuera del DOMContentLoaded)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -289,4 +280,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             });
         }
     });
+});
+
+// Event listener global adicional para asegurar funcionamiento
+document.addEventListener('click', function(e) {
+    const projectLink = e.target.closest('.project-link');
+    if (projectLink) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const href = projectLink.getAttribute('href');
+        console.log('Click global detectado, URL:', href);
+        
+        if (href && href !== '#' && href !== '') {
+            window.open(href, '_blank', 'noopener,noreferrer');
+        }
+    }
 });
